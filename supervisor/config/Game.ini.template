@@ -1,0 +1,33 @@
+; ============================================================================
+;  Game.ini - SDILENY pro vsechny mapy clusteru
+;
+;  TENHLE SOUBOR SE GENERUJE. Needituj ho v instanci - supervisor ho pri
+;  kazdem startu prepise z teto sablony a pak nastavi chmod 444.
+;  Menit se ma TAHLE sablona v gitu, aby zmeny mely historii.
+; ============================================================================
+[/Script/ShooterGame.ShooterGameMode]
+
+; --- Nasobky eventu (generovane z presets.json) ---------------------------
+; Tyhle dve hodnoty NEJDOU nastavit ? parametrem, proto musi byt tady.
+{{RATES}}
+
+; --- Stackovani ------------------------------------------------------------
+; ItemStackSizeMultiplier v GameUserSettings.ini funguje na vetsinu veci,
+; ale kazici se maso ho IGNORUJE - proto se prime meat a mutton resi zvlast.
+; bIgnoreMultiplier=True znamena, ze se globalni nasobek neuplatni a
+; MaxItemQuantity plati absolutne (jinak by se hodnota vynasobila podruhe).
+;
+; POZOR: u muttonu je hlaseno, ze override v nekterych verzich nefunguje.
+; Po nasazeni OVER VE HRE, ne jen v souboru.
+ConfigOverrideItemMaxQuantity=(ItemClassString="PrimalItemConsumable_RawPrimeMeat_C",Quantity=(MaxItemQuantity=500,bIgnoreMultiplier=True))
+ConfigOverrideItemMaxQuantity=(ItemClassString="PrimalItemConsumable_RawMutton_C",Quantity=(MaxItemQuantity=500,bIgnoreMultiplier=True))
+ConfigOverrideItemMaxQuantity=(ItemClassString="PrimalItemConsumable_RawPrimeMeat_Fish_C",Quantity=(MaxItemQuantity=500,bIgnoreMultiplier=True))
+
+; --- Zakazane spawny -------------------------------------------------------
+; Trida existuje jen na Ragnaroku, takze stejny radek na ostatnich mapach
+; nic nedela. Proto nemusi mit kazda mapa vlastni config.
+;
+; ODKOMENTUJ, pokud chces vypnout ledove wyverny na Ragnaroku kvuli
+; rozbitemu overspawnu. Nechavam vypnute zamerne - odstranuje to obsah
+; a nebylo jiste, jestli to na tomhle clusteru jeste plati.
+;NPCReplacements=(FromClassName="Ragnarok_Wyvern_Override_Ice_C",ToClassName="")

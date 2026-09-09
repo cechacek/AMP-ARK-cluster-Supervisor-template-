@@ -1,0 +1,45 @@
+{
+    "_comment": [
+        "Uklid pousteny PRED vypnutim kazde mapy, pri kazdem restartu.",
+        "Poradi je zamerne: SaveWorld -> tyhle prikazy -> SaveWorld -> DoExit.",
+        "Repopulace divoke fauny pak probehne pri bootu, kdy nikdo nehraje.",
+        "",
+        "DestroyWildDinos NEMAZE STRUKTURY, ktere dinosauri postavili - proto se",
+        "uly hromadi na stejnych mistech a DestroyAll BeeHive_C je jeho nutny",
+        "protejsek, ne volitelny doplnek.",
+        "",
+        "DestroyAll vyzaduje PRESNOU shodu nazvu tridy a koncovy argument 1.",
+        "Preklep tise neudela nic - supervisor proto loguje odpoved RCON."
+    ],
+    "_default": [
+        "cheat DestroyWildDinos"
+    ],
+    "Ragnarok": [
+        "cheat DestroyWildDinos",
+        "cheat DestroyAll BeeHive_C 1",
+        "cheat DestroyAll WyvernNest_C 1",
+        "cheat DestroyAll DroppedItemGeneric_FertilizedEgg_NoPhysicsWyvern_C 1"
+    ],
+    "ScorchedEarth_P": [
+        "cheat DestroyWildDinos",
+        "cheat DestroyAll WyvernNest_C 1",
+        "cheat DestroyAll DroppedItemGeneric_FertilizedEgg_NoPhysicsWyvern_C 1"
+    ],
+    "Valguero_P": [
+        "cheat DestroyWildDinos",
+        "cheat DestroyAll BeeHive_C 1"
+    ],
+    "CrystalIsles": [
+        "cheat DestroyWildDinos",
+        "cheat DestroyAll BeeHive_C 1",
+        "cheat DestroyAll DroppedItemGeneric_FertilizedEgg_CrystalWyvern_C 1"
+    ],
+    "TheIsland": [
+        "cheat DestroyWildDinos",
+        "cheat DestroyAll BeeHive_C 1"
+    ],
+    "TheCenter": [
+        "cheat DestroyWildDinos",
+        "cheat DestroyAll BeeHive_C 1"
+    ]
+}

@@ -1,0 +1,44 @@
+{
+    "_comment": [
+        "Nasobky pro evolution eventy. POZOR NA SMER:",
+        "  cmdline/gameini hodnoty v 'up' se ZVYSUJI (expy, taming, sber, liheni),",
+        "  hodnoty v 'down' se SNIZUJI (interval parovani, hlad mladat, cuddle).",
+        "Napsat vsude 4.0 by breeding CTYRNASOBNE ZPOMALILO.",
+        "Klic 'cmdline' jde na prikazovou radku jako ?Klic=hodnota.",
+        "Klic 'gameini' MUSI do Game.ini - pres ? se nastavit neda."
+    ],
+    "normal": {
+        "cmdline": {},
+        "gameini": {}
+    },
+    "2x": {
+        "cmdline": {
+            "XPMultiplier": 2.0,
+            "TamingSpeedMultiplier": 2.0,
+            "HarvestAmountMultiplier": 2.0,
+            "EggHatchSpeedMultiplier": 2.0,
+            "BabyMatureSpeedMultiplier": 2.0,
+            "MatingIntervalMultiplier": 0.5,
+            "BabyFoodConsumptionSpeedMultiplier": 0.5
+        },
+        "gameini": {
+            "LayEggIntervalMultiplier": 0.5,
+            "BabyCuddleIntervalMultiplier": 0.5
+        }
+    },
+    "4x": {
+        "cmdline": {
+            "XPMultiplier": 4.0,
+            "TamingSpeedMultiplier": 4.0,
+            "HarvestAmountMultiplier": 4.0,
+            "EggHatchSpeedMultiplier": 4.0,
+            "BabyMatureSpeedMultiplier": 4.0,
+            "MatingIntervalMultiplier": 0.25,
+            "BabyFoodConsumptionSpeedMultiplier": 0.25
+        },
+        "gameini": {
+            "LayEggIntervalMultiplier": 0.25,
+            "BabyCuddleIntervalMultiplier": 0.25
+        }
+    }
+}

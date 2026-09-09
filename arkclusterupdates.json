@@ -1,0 +1,76 @@
+[
+    {
+        "UpdateStageName": "Symlink Removal",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-c \"rm {{$FullBaseDir}}376030/ShooterGame/Binaries/Win64 >/dev/null 2>&1\"",
+        "SkipOnFailure": true
+    },
+    {
+        "UpdateStageName": "SteamCMD Server Download",
+        "UpdateSourcePlatform": "All",
+        "UpdateSource": "SteamCMD",
+        "UpdateSourceData": "376030",
+        "UpdateSourceArgs": "346110",
+        "UpdateSourceVersion": "{{ServerBranch}}",
+        "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "SteamCMD Directory Creation",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "CreateDirectory",
+        "UpdateSourceArgs": "{{$FullBaseDir}}376030/Engine/Binaries/ThirdParty/SteamCMD/Linux"
+    },
+    {
+        "UpdateStageName": "SteamCMD Symlinks Creation",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-c \"ln -sf {{$FullRootDir}}steamcmd.sh {{$FullRootDir}}linux32 ~/Steam/steamapps {{$FullBaseDir}}376030/Engine/Binaries/ThirdParty/SteamCMD/Linux/\"",
+        "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Working Directory Replacement",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-c \"cd arkcluster/376030/ShooterGame/Binaries && rm -rf Win64 >/dev/null 2>&1; ln -s Linux Win64\"",
+        "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Config Directory Creation",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "CreateDirectory",
+        "UpdateSourceArgs": "{{$FullBaseDir}}376030/ShooterGame/Saved/Config/LinuxServer",
+        "OverwriteExistingFiles": false
+    },
+    {
+        "UpdateStageName": "Supervisor Download",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-c \"cd arkcluster && rm -rf srv >/dev/null 2>&1; DownloadSource=\\\"{{DownloadSource}}\\\"; DownloadBranch=\\\"{{DownloadBranch}}\\\"; [[ -n \\\"{{DownloadUsername}}\\\" ]] && DownloadUrl=\\\"${DownloadSource/https:\\\\/\\\\//https:\\\\/\\\\/{{DownloadUsername}}:{{DownloadPassword}}@}\\\" || DownloadUrl=\\\"$DownloadSource\\\"; [ ! -d .git ] && { echo \\\"Installing supervisor\\\" && git clone \\\"$DownloadUrl\\\" srv >/dev/null && \\\\cp -r srv/. ./ >/dev/null 2>&1 && rm -rf srv >/dev/null 2>&1 && [ -z \\\"$DownloadBranch\\\" ] && DownloadBranch=$(git symbolic-ref refs/remotes/origin/HEAD | sed \\\"s|.*/||\\\"); git checkout $DownloadBranch --force >/dev/null && git pull >/dev/null && echo \\\"Supervisor installed\\\"; } || { echo \\\"Updating supervisor\\\" && git remote set-url origin \\\"$DownloadUrl\\\" >/dev/null && [ -z \\\"$DownloadBranch\\\" ] && DownloadBranch=$(git symbolic-ref refs/remotes/origin/HEAD | sed \\\"s|.*/||\\\"); git checkout $DownloadBranch --force >/dev/null && git pull >/dev/null && echo \\\"Supervisor updated\\\"; }\"",
+        "UpdateSourceConditionSetting": "DownloadType",
+        "UpdateSourceConditionValue": "GitRepo",
+        "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Create Virtual Environment",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-c \"if ! command -v /usr/bin/python{{PythonVersion}} >/dev/null 2>&1; then echo 'Error: Python {{PythonVersion}} neni nainstalovany. Nainstaluj balicek python{{PythonVersion}} a spust update znovu.'; exit 1; fi; /usr/bin/python{{PythonVersion}} -u -m venv --clear --upgrade-deps \\\"{{$FullBaseDir}}venv\\\"\"",
+        "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Install Python Packages",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-c \"cd \\\"{{$FullBaseDir}}\\\" && source ./venv/bin/activate && python3 -u -m pip install -U -r ./{{AppDir}}/requirements.txt\"",
+        "UpdateSourceConditionSetting": "PackagesInstallType",
+        "UpdateSourceConditionValue": "file",
+        "SkipOnFailure": false
+    }
+]

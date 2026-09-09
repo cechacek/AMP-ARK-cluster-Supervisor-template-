@@ -1,0 +1,421 @@
+[
+    {
+        "Protocol": "UDP",
+        "Port": 7777,
+        "Ref": "GamePort",
+        "Name": "Game Port - TheIsland",
+        "Description": "Herni provoz prvni mapy; dalsi mapy jsou odvozene offsetem",
+        "ChildPorts": [
+            {
+                "Protocol": "UDP",
+                "Port": 7778,
+                "Offset": 1,
+                "Ref": "PeerPort0",
+                "Name": "Peer Port - TheIsland",
+                "Description": "Steam P2P provoz mapy TheIsland"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 7779,
+                "Offset": 2,
+                "Ref": "GamePort1",
+                "Name": "Game Port - TheCenter",
+                "Description": "Herni provoz mapy TheCenter"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 7780,
+                "Offset": 3,
+                "Ref": "PeerPort1",
+                "Name": "Peer Port - TheCenter",
+                "Description": "Steam P2P provoz mapy TheCenter"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 7781,
+                "Offset": 4,
+                "Ref": "GamePort2",
+                "Name": "Game Port - ScorchedEarth_P",
+                "Description": "Herni provoz mapy ScorchedEarth_P"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 7782,
+                "Offset": 5,
+                "Ref": "PeerPort2",
+                "Name": "Peer Port - ScorchedEarth_P",
+                "Description": "Steam P2P provoz mapy ScorchedEarth_P"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 7783,
+                "Offset": 6,
+                "Ref": "GamePort3",
+                "Name": "Game Port - Ragnarok",
+                "Description": "Herni provoz mapy Ragnarok"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 7784,
+                "Offset": 7,
+                "Ref": "PeerPort3",
+                "Name": "Peer Port - Ragnarok",
+                "Description": "Steam P2P provoz mapy Ragnarok"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 7785,
+                "Offset": 8,
+                "Ref": "GamePort4",
+                "Name": "Game Port - Aberration_P",
+                "Description": "Herni provoz mapy Aberration_P"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 7786,
+                "Offset": 9,
+                "Ref": "PeerPort4",
+                "Name": "Peer Port - Aberration_P",
+                "Description": "Steam P2P provoz mapy Aberration_P"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 7787,
+                "Offset": 10,
+                "Ref": "GamePort5",
+                "Name": "Game Port - Extinction",
+                "Description": "Herni provoz mapy Extinction"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 7788,
+                "Offset": 11,
+                "Ref": "PeerPort5",
+                "Name": "Peer Port - Extinction",
+                "Description": "Steam P2P provoz mapy Extinction"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 7789,
+                "Offset": 12,
+                "Ref": "GamePort6",
+                "Name": "Game Port - Valguero_P",
+                "Description": "Herni provoz mapy Valguero_P"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 7790,
+                "Offset": 13,
+                "Ref": "PeerPort6",
+                "Name": "Peer Port - Valguero_P",
+                "Description": "Steam P2P provoz mapy Valguero_P"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 7791,
+                "Offset": 14,
+                "Ref": "GamePort7",
+                "Name": "Game Port - Genesis",
+                "Description": "Herni provoz mapy Genesis"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 7792,
+                "Offset": 15,
+                "Ref": "PeerPort7",
+                "Name": "Peer Port - Genesis",
+                "Description": "Steam P2P provoz mapy Genesis"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 7793,
+                "Offset": 16,
+                "Ref": "GamePort8",
+                "Name": "Game Port - CrystalIsles",
+                "Description": "Herni provoz mapy CrystalIsles"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 7794,
+                "Offset": 17,
+                "Ref": "PeerPort8",
+                "Name": "Peer Port - CrystalIsles",
+                "Description": "Steam P2P provoz mapy CrystalIsles"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 7795,
+                "Offset": 18,
+                "Ref": "GamePort9",
+                "Name": "Game Port - Gen2",
+                "Description": "Herni provoz mapy Gen2"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 7796,
+                "Offset": 19,
+                "Ref": "PeerPort9",
+                "Name": "Peer Port - Gen2",
+                "Description": "Steam P2P provoz mapy Gen2"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 7797,
+                "Offset": 20,
+                "Ref": "GamePort10",
+                "Name": "Game Port - LostIsland",
+                "Description": "Herni provoz mapy LostIsland"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 7798,
+                "Offset": 21,
+                "Ref": "PeerPort10",
+                "Name": "Peer Port - LostIsland",
+                "Description": "Steam P2P provoz mapy LostIsland"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 7799,
+                "Offset": 22,
+                "Ref": "GamePort11",
+                "Name": "Game Port - Fjordur",
+                "Description": "Herni provoz mapy Fjordur"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 7800,
+                "Offset": 23,
+                "Ref": "PeerPort11",
+                "Name": "Peer Port - Fjordur",
+                "Description": "Steam P2P provoz mapy Fjordur"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 7801,
+                "Offset": 24,
+                "Ref": "GamePort12",
+                "Name": "Game Port - Aquatica",
+                "Description": "Herni provoz mapy Aquatica"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 7802,
+                "Offset": 25,
+                "Ref": "PeerPort12",
+                "Name": "Peer Port - Aquatica",
+                "Description": "Steam P2P provoz mapy Aquatica"
+            }
+        ]
+    },
+    {
+        "Protocol": "UDP",
+        "Port": 27015,
+        "Ref": "QueryPort",
+        "Name": "Query Port - TheIsland",
+        "Description": "Steam query prvni mapy",
+        "ChildPorts": [
+            {
+                "Protocol": "UDP",
+                "Port": 27016,
+                "Offset": 1,
+                "Ref": "QueryPort1",
+                "Name": "Query Port - TheCenter",
+                "Description": "Steam query mapy TheCenter"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 27017,
+                "Offset": 2,
+                "Ref": "QueryPort2",
+                "Name": "Query Port - ScorchedEarth_P",
+                "Description": "Steam query mapy ScorchedEarth_P"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 27018,
+                "Offset": 3,
+                "Ref": "QueryPort3",
+                "Name": "Query Port - Ragnarok",
+                "Description": "Steam query mapy Ragnarok"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 27019,
+                "Offset": 4,
+                "Ref": "QueryPort4",
+                "Name": "Query Port - Aberration_P",
+                "Description": "Steam query mapy Aberration_P"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 27020,
+                "Offset": 5,
+                "Ref": "QueryPort5",
+                "Name": "Query Port - Extinction",
+                "Description": "Steam query mapy Extinction"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 27021,
+                "Offset": 6,
+                "Ref": "QueryPort6",
+                "Name": "Query Port - Valguero_P",
+                "Description": "Steam query mapy Valguero_P"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 27022,
+                "Offset": 7,
+                "Ref": "QueryPort7",
+                "Name": "Query Port - Genesis",
+                "Description": "Steam query mapy Genesis"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 27023,
+                "Offset": 8,
+                "Ref": "QueryPort8",
+                "Name": "Query Port - CrystalIsles",
+                "Description": "Steam query mapy CrystalIsles"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 27024,
+                "Offset": 9,
+                "Ref": "QueryPort9",
+                "Name": "Query Port - Gen2",
+                "Description": "Steam query mapy Gen2"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 27025,
+                "Offset": 10,
+                "Ref": "QueryPort10",
+                "Name": "Query Port - LostIsland",
+                "Description": "Steam query mapy LostIsland"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 27026,
+                "Offset": 11,
+                "Ref": "QueryPort11",
+                "Name": "Query Port - Fjordur",
+                "Description": "Steam query mapy Fjordur"
+            },
+            {
+                "Protocol": "UDP",
+                "Port": 27027,
+                "Offset": 12,
+                "Ref": "QueryPort12",
+                "Name": "Query Port - Aquatica",
+                "Description": "Steam query mapy Aquatica"
+            }
+        ]
+    },
+    {
+        "Protocol": "TCP",
+        "Port": 27100,
+        "Ref": "RCONPort",
+        "Name": "RCON Port - TheIsland",
+        "Description": "RCON prvni mapy; supervisor se pripojuje na localhost",
+        "ChildPorts": [
+            {
+                "Protocol": "TCP",
+                "Port": 27101,
+                "Offset": 1,
+                "Ref": "RCONPort1",
+                "Name": "RCON Port - TheCenter",
+                "Description": "RCON mapy TheCenter (interni, supervisor)"
+            },
+            {
+                "Protocol": "TCP",
+                "Port": 27102,
+                "Offset": 2,
+                "Ref": "RCONPort2",
+                "Name": "RCON Port - ScorchedEarth_P",
+                "Description": "RCON mapy ScorchedEarth_P (interni, supervisor)"
+            },
+            {
+                "Protocol": "TCP",
+                "Port": 27103,
+                "Offset": 3,
+                "Ref": "RCONPort3",
+                "Name": "RCON Port - Ragnarok",
+                "Description": "RCON mapy Ragnarok (interni, supervisor)"
+            },
+            {
+                "Protocol": "TCP",
+                "Port": 27104,
+                "Offset": 4,
+                "Ref": "RCONPort4",
+                "Name": "RCON Port - Aberration_P",
+                "Description": "RCON mapy Aberration_P (interni, supervisor)"
+            },
+            {
+                "Protocol": "TCP",
+                "Port": 27105,
+                "Offset": 5,
+                "Ref": "RCONPort5",
+                "Name": "RCON Port - Extinction",
+                "Description": "RCON mapy Extinction (interni, supervisor)"
+            },
+            {
+                "Protocol": "TCP",
+                "Port": 27106,
+                "Offset": 6,
+                "Ref": "RCONPort6",
+                "Name": "RCON Port - Valguero_P",
+                "Description": "RCON mapy Valguero_P (interni, supervisor)"
+            },
+            {
+                "Protocol": "TCP",
+                "Port": 27107,
+                "Offset": 7,
+                "Ref": "RCONPort7",
+                "Name": "RCON Port - Genesis",
+                "Description": "RCON mapy Genesis (interni, supervisor)"
+            },
+            {
+                "Protocol": "TCP",
+                "Port": 27108,
+                "Offset": 8,
+                "Ref": "RCONPort8",
+                "Name": "RCON Port - CrystalIsles",
+                "Description": "RCON mapy CrystalIsles (interni, supervisor)"
+            },
+            {
+                "Protocol": "TCP",
+                "Port": 27109,
+                "Offset": 9,
+                "Ref": "RCONPort9",
+                "Name": "RCON Port - Gen2",
+                "Description": "RCON mapy Gen2 (interni, supervisor)"
+            },
+            {
+                "Protocol": "TCP",
+                "Port": 27110,
+                "Offset": 10,
+                "Ref": "RCONPort10",
+                "Name": "RCON Port - LostIsland",
+                "Description": "RCON mapy LostIsland (interni, supervisor)"
+            },
+            {
+                "Protocol": "TCP",
+                "Port": 27111,
+                "Offset": 11,
+                "Ref": "RCONPort11",
+                "Name": "RCON Port - Fjordur",
+                "Description": "RCON mapy Fjordur (interni, supervisor)"
+            },
+            {
+                "Protocol": "TCP",
+                "Port": 27112,
+                "Offset": 12,
+                "Ref": "RCONPort12",
+                "Name": "RCON Port - Aquatica",
+                "Description": "RCON mapy Aquatica (interni, supervisor)"
+            }
+        ]
+    }
+]

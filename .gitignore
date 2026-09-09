@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.venv/
+
+# --- nize: existuje jen v instanci AMP, ne v repu ---
+376030/
+venv/
+logs/
+clusterdata/
+srv/
+supervisor-state.json

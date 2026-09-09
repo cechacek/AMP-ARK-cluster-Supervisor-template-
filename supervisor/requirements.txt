@@ -1,0 +1,3 @@
+# Zamerne prazdne - supervisor bezi na ciste standardni knihovne.
+# Source RCON je ~90 radku v rcon.py; externi balicek by se pri kazdem
+# update venvu (--clear) stahoval znovu a pridaval bod selhani.
