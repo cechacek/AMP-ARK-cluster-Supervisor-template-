@@ -8,7 +8,10 @@
 [/Script/ShooterGame.ShooterGameMode]
 
 ; --- Nasobky eventu (generovane z presets.json) ---------------------------
-; Tyhle dve hodnoty NEJDOU nastavit ? parametrem, proto musi byt tady.
+; Sest ze sesti nasobku breedingu MUSI byt tady - v tabulce Game.ini na
+; oficialni wiki neni sloupec CMD vubec, takze pres ? parametr se nastavit
+; nedaji a tise by se zahodily. Na prikazovou radku patri jen XPMultiplier,
+; TamingSpeedMultiplier a HarvestAmountMultiplier.
 {{RATES}}
 
 ; --- Stackovani ------------------------------------------------------------
@@ -23,11 +26,23 @@ ConfigOverrideItemMaxQuantity=(ItemClassString="PrimalItemConsumable_RawPrimeMea
 ConfigOverrideItemMaxQuantity=(ItemClassString="PrimalItemConsumable_RawMutton_C",Quantity=(MaxItemQuantity=500,bIgnoreMultiplier=True))
 ConfigOverrideItemMaxQuantity=(ItemClassString="PrimalItemConsumable_RawPrimeMeat_Fish_C",Quantity=(MaxItemQuantity=500,bIgnoreMultiplier=True))
 
-; --- Zakazane spawny -------------------------------------------------------
-; Trida existuje jen na Ragnaroku, takze stejny radek na ostatnich mapach
-; nic nedela. Proto nemusi mit kazda mapa vlastni config.
+; --- Nahrazeni ledovych wyvern --------------------------------------------
+; Syntaxe podle oficialni wiki:
+;   NPCReplacements=(FromClassName="<classname>", ToClassName="<classname>")
+; Prazdny ToClassName spawn UPLNE ZRUSI, jmeno jine tridy ho NAHRADI.
 ;
-; ODKOMENTUJ, pokud chces vypnout ledove wyverny na Ragnaroku kvuli
-; rozbitemu overspawnu. Nechavam vypnute zamerne - odstranuje to obsah
-; a nebylo jiste, jestli to na tomhle clusteru jeste plati.
-;NPCReplacements=(FromClassName="Ragnarok_Wyvern_Override_Ice_C",ToClassName="")
+; Nahrazeni normalni wyvernou je lepsi nez zruseni: hnizdni mista zustanou
+; obsazena a nevznikne prazdne misto na mape. Ragnarok_Wyvern_Override_C je
+; ragnarocka ohniva wyverna; alternativy jsou Wyvern_Character_BP_Poison_C
+; a Wyvern_Character_BP_Lightning_C.
+;
+; !!! POZOR, TENHLE SOUBOR JE SDILENY VSEMI MAPAMI !!!
+; Valguero pouziva STEJNOU tridu Ragnarok_Wyvern_Override_Ice_C. Odkomentovani
+; nize proto vypne ledove wyverny i na Valgueru, ne jen na Ragnaroku.
+; Drive tu stalo, ze trida existuje jen na Ragnaroku - to bylo OVERENE SPATNE.
+; Pokud chces zasahnout jen jednu mapu, musi ta mapa dostat vlastni config
+; adresar; sdilenym Game.ini to udelat nejde.
+;
+; Zmena se projevi az na nove spawny, takze po ni musi probehnout
+; DestroyWildDinos - to mapfixes.json dela pri kazdem restartu automaticky.
+;NPCReplacements=(FromClassName="Ragnarok_Wyvern_Override_Ice_C",ToClassName="Ragnarok_Wyvern_Override_C")

@@ -1,45 +1,123 @@
 {
     "_comment": [
         "Uklid pousteny PRED vypnutim kazde mapy, pri kazdem restartu.",
-        "Poradi je zamerne: SaveWorld -> tyhle prikazy -> SaveWorld -> DoExit.",
+        "Poradi ve stop(): tyhle prikazy -> SaveWorld -> DoExit.",
         "Repopulace divoke fauny pak probehne pri bootu, kdy nikdo nehraje.",
         "",
-        "DestroyWildDinos NEMAZE STRUKTURY, ktere dinosauri postavili - proto se",
-        "uly hromadi na stejnych mistech a DestroyAll BeeHive_C je jeho nutny",
-        "protejsek, ne volitelny doplnek.",
+        "DVE SKUPINY:",
+        "  safe        - bezi vzdy. Maze jen divokou faunu a veci, ktere hrac",
+        "                nemuze vlastnit (hnizda, nesebrana divoka vejce).",
+        "  destructive - bezi JEN kdyz je v nastaveni instance zapnute",
+        "                'Destructive Restart Cleanup'. Vychozi stav je VYPNUTO.",
         "",
-        "DestroyAll vyzaduje PRESNOU shodu nazvu tridy a koncovy argument 1.",
-        "Preklep tise neudela nic - supervisor proto loguje odpoved RCON."
+        "Proc je uklid ulu destruktivni: zdroje si PROTIRECI. Cast tvrdi, ze",
+        "'DestroyAll BeeHive_C 1' smaze uly divoke i HRACSKE, cast ze hracske",
+        "necha byt. Definice DestroyAll na wiki rika 'including tamed ones'.",
+        "Postaveny ul je ochocena Giant Queen Bee premenena na strukturu, takze",
+        "spatny odhad znamena NEVRATNOU ztratu ochocenciho zvirete i s medem.",
+        "Proto vychozi VYPNUTO - dokud to nekdo neoveri na vlastnim serveru.",
+        "",
+        "DestroyWildDinos NEMAZE STRUKTURY, ktere dinosauri postavili - proto se",
+        "uly hromadi prave tehdy, kdyz se DestroyWildDinos pousti casto.",
+        "",
+        "OVEROVANI NAZVU TRID: DestroyAll nevraci ZADNY vystup - ani pri uspechu,",
+        "ani pri preklepu (ARK odpovi 'Server received, But no response!!', coz",
+        "rcon.py normalizuje na prazdny retezec). Log v supervisoru tedy dokazuje",
+        "jen to, ze prikaz dorazil na server, NE ze neco nasel. Drive tu stalo,",
+        "ze log preklep odhali - to nebyla pravda.",
+        "Novou tridu proto over ve hre pres 'cheat GetAll <Trida>' DRIV, nez ji",
+        "sem pridas. Supervisor to umi: prikaz 'verifyfixes <mapa>'."
     ],
-    "_default": [
-        "cheat DestroyWildDinos"
+    "_todo": [
+        "Kandidati, ktere je potreba nejdriv overit pres GetAll, pak teprve zapnout:",
+        "  CrystalIsles - krystalove wyverny maji vlastni hnizdni actor? Wiki uvadi",
+        "                 Crystal Isles mezi mapami s wyverninmi hnizdy, ale trida",
+        "                 nemusi byt WyvernNest_C.",
+        "  Valguero_P   - Deinonychus hnizda v White Cliffs strandaji vejce stejne",
+        "                 jako wyverni; trida neoverena.",
+        "  Fjordur      - wyverni hnizda a navic Fenrir/lox oblasti.",
+        "  vsechny      - bobri hraze (beaver dams) se take hromadi."
     ],
-    "Ragnarok": [
-        "cheat DestroyWildDinos",
-        "cheat DestroyAll BeeHive_C 1",
-        "cheat DestroyAll WyvernNest_C 1",
-        "cheat DestroyAll DroppedItemGeneric_FertilizedEgg_NoPhysicsWyvern_C 1"
-    ],
-    "ScorchedEarth_P": [
-        "cheat DestroyWildDinos",
-        "cheat DestroyAll WyvernNest_C 1",
-        "cheat DestroyAll DroppedItemGeneric_FertilizedEgg_NoPhysicsWyvern_C 1"
-    ],
-    "Valguero_P": [
-        "cheat DestroyWildDinos",
-        "cheat DestroyAll BeeHive_C 1"
-    ],
-    "CrystalIsles": [
-        "cheat DestroyWildDinos",
-        "cheat DestroyAll BeeHive_C 1",
-        "cheat DestroyAll DroppedItemGeneric_FertilizedEgg_CrystalWyvern_C 1"
-    ],
-    "TheIsland": [
-        "cheat DestroyWildDinos",
-        "cheat DestroyAll BeeHive_C 1"
-    ],
-    "TheCenter": [
-        "cheat DestroyWildDinos",
-        "cheat DestroyAll BeeHive_C 1"
-    ]
+    "_default": {
+        "safe": [
+            "cheat DestroyWildDinos"
+        ],
+        "destructive": []
+    },
+    "TheIsland": {
+        "safe": [
+            "cheat DestroyWildDinos"
+        ],
+        "destructive": [
+            "cheat DestroyAll BeeHive_C 1"
+        ]
+    },
+    "TheCenter": {
+        "safe": [
+            "cheat DestroyWildDinos"
+        ],
+        "destructive": [
+            "cheat DestroyAll BeeHive_C 1"
+        ]
+    },
+    "ScorchedEarth_P": {
+        "safe": [
+            "cheat DestroyWildDinos",
+            "cheat DestroyAll WyvernNest_C 1",
+            "cheat DestroyAll DroppedItemGeneric_FertilizedEgg_NoPhysicsWyvern_C 1"
+        ],
+        "destructive": []
+    },
+    "Ragnarok": {
+        "safe": [
+            "cheat DestroyWildDinos",
+            "cheat DestroyAll WyvernNest_C 1",
+            "cheat DestroyAll DroppedItemGeneric_FertilizedEgg_NoPhysicsWyvern_C 1"
+        ],
+        "destructive": [
+            "cheat DestroyAll BeeHive_C 1"
+        ]
+    },
+    "Aberration_P": {
+        "safe": [
+            "cheat DestroyWildDinos",
+            "cheat DestroyAll DroppedItemGeneric_FertilizedEgg_RockDrake_NoPhysics_C 1"
+        ],
+        "destructive": []
+    },
+    "Valguero_P": {
+        "safe": [
+            "cheat DestroyWildDinos",
+            "cheat DestroyAll WyvernNest_C 1",
+            "cheat DestroyAll DroppedItemGeneric_FertilizedEgg_NoPhysicsWyvern_C 1"
+        ],
+        "destructive": [
+            "cheat DestroyAll BeeHive_C 1"
+        ]
+    },
+    "CrystalIsles": {
+        "safe": [
+            "cheat DestroyWildDinos",
+            "cheat DestroyAll DroppedItemGeneric_FertilizedEgg_CrystalWyvern_C 1"
+        ],
+        "destructive": [
+            "cheat DestroyAll BeeHive_C 1"
+        ]
+    },
+    "LostIsland": {
+        "safe": [
+            "cheat DestroyWildDinos",
+            "cheat DestroyAll WyvernNest_C 1",
+            "cheat DestroyAll DroppedItemGeneric_FertilizedEgg_NoPhysicsWyvern_C 1"
+        ],
+        "destructive": []
+    },
+    "Fjordur": {
+        "safe": [
+            "cheat DestroyWildDinos",
+            "cheat DestroyAll WyvernNest_C 1",
+            "cheat DestroyAll DroppedItemGeneric_FertilizedEgg_NoPhysicsWyvern_C 1"
+        ],
+        "destructive": []
+    }
 }

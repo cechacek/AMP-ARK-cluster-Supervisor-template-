@@ -50,6 +50,7 @@ rcon <mapa> <prikaz>  |  rconall <prikaz>
 saveall
 kick|ban <hrac>       supervisor mapu dohleda sam
 whereis <hrac>
+verifyfixes [mapa]    over nazvy trid v mapfixes.json pres GetAll
 event list|status|set <preset>|apply
 quiesce | dequiesce
 DoExit                korektni ukonceni celeho clusteru
@@ -72,8 +73,12 @@ nech scheduler AMP poslat `event set 2x` v pátek a `event set normal` v ponděl
 
 | kde | co |
 |---|---|
-| příkazová řádka (`?Klic=hodnota`) | XP, taming, harvest, egg hatch, baby mature, mating interval, baby food |
-| `Game.ini` — přes `?` to **nejde** | `LayEggIntervalMultiplier`, `BabyCuddleIntervalMultiplier` |
+| příkazová řádka (`?Klic=hodnota`) | `XPMultiplier`, `TamingSpeedMultiplier`, `HarvestAmountMultiplier` — **a nic víc** |
+| `Game.ini` — přes `?` to **nejde** | `EggHatchSpeedMultiplier`, `BabyMatureSpeedMultiplier`, `MatingIntervalMultiplier`, `BabyFoodConsumptionSpeedMultiplier`, `LayEggIntervalMultiplier`, `BabyCuddleIntervalMultiplier` |
+
+Ověřeno proti tabulkám oficiální wiki: v `[ServerSettings]` se `CMD=yes` jsou
+opravdu jen ty tři. Tabulka Game.ini **nemá sloupec CMD vůbec**, takže cokoli
+odtud předané přes `?` se tiše zahodí a event by breeding nezměnil.
 
 Proto supervisor `Game.ini` **generuje** ze šablony v tomhle repu a pak ho zamkne
 na `chmod 444`. ARK si ten soubor jinak při vypnutí přepisuje vlastními hodnotami.
@@ -90,7 +95,7 @@ Konfigurace je generovaná — needituj ji v instanci, přepíše se. Uprav mís
 | `supervisor/config/Game.ini.template` | stackování, zakázané spawny, rates |
 | `supervisor/config/GameUserSettings.ini.template` | základní nastavení serveru |
 | `supervisor/presets.json` | násobky eventů |
-| `supervisor/mapfixes.json` | úklid před vypnutím, per mapa |
+| `supervisor/mapfixes.json` | úklid před vypnutím, per mapa (`safe` / `destructive`) |
 
 ### Stackování
 
@@ -102,14 +107,28 @@ nefunguje — ověř ve hře, ne jen v souboru.
 ### Restartové fixy
 
 `DestroyWildDinos` **nemaže struktury**, které dinosauři postavili — proto se úly
-hromadí a `DestroyAll BeeHive_C` je jeho nutný protějšek, ne doplněk.
+hromadí právě tehdy, když se ten příkaz pouští často.
 
 Úklid běží **před** vypnutím mapy, aby repopulace (5–10 min) proběhla při bootu,
-kdy nikdo nehraje. `DestroyAll` vyžaduje **přesnou** shodu názvu třídy a koncový
-argument `1`; překlep tiše neudělá nic, takže supervisor loguje odpověď RCON.
+kdy nikdo nehraje.
 
-Ledové wyverny na Ragnaroku (`Ragnarok_Wyvern_Override_Ice_C`) jsou v šabloně
-**zakomentované** — odkomentuj, pokud tě trápí jejich overspawn.
+Úklid je rozdělený na dvě skupiny:
+
+- **safe** — běží vždy. Maže jen divokou faunu a věci, které hráč nemůže vlastnit
+  (hnízda, nesebraná divoká vejce).
+- **destructive** — běží jen když zapneš *Destructive Restart Cleanup*
+  (výchozí **vypnuto**). Sem patří `DestroyAll BeeHive_C`, protože zdroje si
+  protiřečí v tom, jestli maže i **hráčské** úly. Postavený úl je ochočená Giant
+  Queen Bee, takže špatný odhad znamená nevratnou ztrátu zvířete.
+
+**`DestroyAll` nevrací žádný výstup** — ani při úspěchu, ani při překlepu v názvu
+třídy. Log tedy dokazuje jen to, že příkaz dorazil na server. Novou třídu ověř
+příkazem `verifyfixes`, který pro každou třídu pošle `GetAll` a spočítá výskyty.
+
+Ledové wyverny jsou v šabloně **zakomentované**, a to ve variantě, která je
+**nahradí** normální wyvernou místo aby je zrušila — hnízdní místa tak zůstanou
+obsazená. Pozor: `Ragnarok_Wyvern_Override_Ice_C` používá **i Valguero**, a
+`Game.ini` je sdílený, takže odkomentování zasáhne obě mapy.
 
 ## Porty
 

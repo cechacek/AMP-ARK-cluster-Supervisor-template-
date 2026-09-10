@@ -73,19 +73,41 @@ class RconClient:
 
     # --- prikazy ---
 
-    def command(self, cmd, retry=True):
-        """Posle prikaz a vrati odpoved. Pri padlem spojeni se jednou znovu pripoji."""
+    def command(self, cmd, retry=True, timeout=None):
+        """Posle prikaz a vrati odpoved.
+
+        `timeout` doocasne prepise socketovy timeout - SaveWorld velkeho sveta
+        trva desitky sekund a s vychozimi 10 s by se timeoutnul, znovu poslal
+        na cerstvem spojeni a psal by do sveta dvakrat naraz. Tak vznikaji
+        useknute .ark soubory.
+        """
         with self._lock:
+            prev = self.timeout
+            if timeout is not None:
+                self.timeout = timeout
+                if self._sock is not None:
+                    try:
+                        self._sock.settimeout(timeout)
+                    except OSError:
+                        pass
             try:
-                if self._sock is None:
+                try:
+                    if self._sock is None:
+                        self._connect_locked()
+                    return self._command_locked(cmd)
+                except (OSError, RconError):
+                    self._close_locked()
+                    if not retry:
+                        raise
                     self._connect_locked()
-                return self._command_locked(cmd)
-            except (OSError, RconError):
-                self._close_locked()
-                if not retry:
-                    raise
-                self._connect_locked()
-                return self._command_locked(cmd)
+                    return self._command_locked(cmd)
+            finally:
+                self.timeout = prev
+                if self._sock is not None:
+                    try:
+                        self._sock.settimeout(prev)
+                    except OSError:
+                        pass
 
     def _command_locked(self, cmd):
         req_id = self._send_locked(SERVERDATA_EXECCOMMAND, cmd)
@@ -95,10 +117,18 @@ class RconClient:
             if pkt_id != req_id:
                 continue
             parts.append(body)
-            # ARK posila odpoved v jednom paketu; delsi vypisy se deli po 4096 B.
-            if len(body) < 4000:
+            # Porovnava se DELKA V BAJTECH proti bajtove hranici paketu
+            # (4096 - 8 B hlavicka - 2 B ukoncovaci nuly). Merit znaky by
+            # u diakritiky utrhlo odpoved uprostred.
+            if len(body) < 4086:
                 break
-        out = "".join(parts).strip()
+            # Dalsi paket uz jen dobirame - kratky timeout, at neuvizneme,
+            # kdyz zadny nedorazi.
+            try:
+                self._sock.settimeout(1.0)
+            except OSError:
+                pass
+        out = b"".join(parts).decode("utf-8", errors="replace").strip()
         return "" if out == ARK_EMPTY else out
 
     # --- protokol ---
@@ -117,8 +147,8 @@ class RconClient:
             raise RconError(f"RCON: nesmyslna delka paketu {length}")
         payload = self._recv_exactly(length)
         pkt_id, pkt_type = struct.unpack("<ii", payload[:8])
-        body = payload[8:-2].decode("utf-8", errors="replace")
-        return pkt_id, pkt_type, body
+        # Bajty, ne str - vicebajtovy znak muze byt rozdeleny mezi pakety.
+        return pkt_id, pkt_type, payload[8:-2]
 
     def _recv_exactly(self, count):
         buf = b""
